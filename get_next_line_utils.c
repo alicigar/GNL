@@ -6,7 +6,7 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:49:03 by alicigar          #+#    #+#             */
-/*   Updated: 2025/03/10 02:02:24 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/03/10 04:50:11 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,15 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
+	while (*s)
 	{
-		if (s[i] == (char)c)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
@@ -43,18 +38,21 @@ char	*ft_strchr(const char *s, int c)
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	size_t	i;
+	size_t	len;
 
-	dup = (char *) malloc(ft_strlen(s) + 1);
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s) + 1;
+	dup = malloc(len);
 	if (!dup)
 		return (NULL);
-	i = 0;
-	while (s[i])
+	len = 0;
+	while (s[len])
 	{
-		dup[i] = s[i];
-		i++;
+		dup[len] = s[len];
+		len++;
 	}
-	dup[i] = 0;
+	dup[len] = '\0';
 	return (dup);
 }
 
@@ -64,20 +62,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s2)
+	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
-	ns = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!s2)
+		return (ft_strdup(s1));
+	ns = malloc ((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!ns)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		ns[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		ns[j++] = s2[i++];
-	ns[j] = '\0';
+	i = -1;
+	while (s1[++i])
+		ns[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		ns[i + j] = s2[j];
+	ns[i + j] = '\0';
+	free((void *)s1);
 	return (ns);
 }

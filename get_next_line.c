@@ -6,7 +6,7 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:49:01 by alicigar          #+#    #+#             */
-/*   Updated: 2025/03/10 01:18:34 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/03/10 04:45:56 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ static char	*ft_read_file(int fd, char *buffer)
 		if (bytes_read == -1)
 			break ;
 		temp[bytes_read] = '\0';
-		if (bytes_read == 0)
-			break ;
-		buffer = ft_strjoin (buffer, temp);
+		buffer = ft_strjoin(buffer, temp);
 		if (!buffer)
 			break ;
 	}
@@ -53,7 +51,6 @@ static char	*ft_extract_line(char *buffer)
 {
 	char	*line;
 	size_t	i;
-	size_t	j;
 
 	if (!buffer || !*buffer)
 		return (NULL);
@@ -64,16 +61,14 @@ static char	*ft_extract_line(char *buffer)
 	if (!line)
 		return (NULL);
 	i = 0;
-	j = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
-		line[j] = buffer[i];
+		line[i] = buffer[i];
 		i++;
-		j++;
 	}
 	if (buffer[i] == '\n')
-		line[j++] = '\n';
-	line[j] = '\0';
+		line[i++] = '\n';
+	line[i] = '\0';
 	return (line);
 }
 

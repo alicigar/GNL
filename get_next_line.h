@@ -6,14 +6,14 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:48:58 by alicigar          #+#    #+#             */
-/*   Updated: 2025/03/10 02:03:33 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/03/10 04:43:49 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 # include <stdlib.h>
 # include <unistd.h>
