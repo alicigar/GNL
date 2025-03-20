@@ -6,11 +6,11 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:49:01 by alicigar          #+#    #+#             */
-/*   Updated: 2025/03/10 04:45:56 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/03/18 20:07:26 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	*ft_free(char **ptr)
 {
@@ -99,17 +99,17 @@ static char	*ft_clean_buffer(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
+	static char	*buffer[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (ft_free(&buffer));
-	buffer = ft_read_file(fd, buffer);
-	if (!buffer)
+		return (ft_free(&buffer[fd]));
+	buffer[fd] = ft_read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_extract_line(buffer);
+	line = ft_extract_line(buffer[fd]);
 	if (!line)
-		return (ft_free(&buffer));
-	buffer = ft_clean_buffer(buffer);
+		return (ft_free(&buffer[fd]));
+	buffer[fd] = ft_clean_buffer(buffer[fd]);
 	return (line);
 }
